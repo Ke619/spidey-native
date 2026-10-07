@@ -16,7 +16,7 @@ export default function App() {
     const w = gl.drawingBufferWidth, h = gl.drawingBufferHeight;
     const renderer = new Renderer({ gl });
     renderer.setSize(w, h);
-    renderer.setClearColor(0x0a0512, 1);
+    renderer.setClearColor(0x223344, 1);
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(60, w / h, 0.1, 1000);
@@ -42,7 +42,7 @@ export default function App() {
 
     const fbx = new FBXLoader().parse(bytes.buffer, '');
     console.log('fbx loaded, children:', fbx.children.length);
-    scene.add(fbx);
+    fbx.scale.setScalar(0.02); scene.add(fbx); scene.add(new THREE.Mesh(new THREE.BoxGeometry(1,1,1), new THREE.MeshBasicMaterial({color: 0xff00ff})));
 
     const render = () => {
       rafRef.current = requestAnimationFrame(render);
