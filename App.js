@@ -36,7 +36,7 @@ export default function App() {
     const b64 = await FileSystem.readAsStringAsync(uri, {
       encoding: FileSystem.EncodingType.Base64,
     });
-    const bin = global.atob ? atob(b64) : '';
+    const bin = require('./b64').decode(b64);
     const bytes = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
 
