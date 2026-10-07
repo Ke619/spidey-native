@@ -2,8 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { GLView } from 'expo-gl';
-import { Renderer } from 'expo-three';
-import { Asset } from 'expo-asset';
+import { Renderer, TextureLoader } from 'expo-three';
 import * as THREE from 'three';
 
 export default function App() {
@@ -27,9 +26,7 @@ export default function App() {
     const camera = new THREE.PerspectiveCamera(70, width / height, 0.1, 100);
     camera.position.set(0, 0, 3);
 
-    const asset = Asset.fromModule(require('./assets/icon.png'));
-    await asset.downloadAsync();
-    const tex = new THREE.TextureLoader().load(asset.localUri || asset.uri);
+    const tex = new TextureLoader().load(require('./assets/icon.png'));
 
     const geometry = new THREE.BoxGeometry(1, 1, 1);
     const material = new THREE.MeshBasicMaterial({ map: tex });
